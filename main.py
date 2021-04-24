@@ -159,6 +159,8 @@ async def execute(ctx):
       route.append([r,c])
       r += dr
       c += dc
+      r = r % len(board[0])
+      c = c % len(board)
   else:
     await ctx.send("You can execute the board on your turn.")
 
