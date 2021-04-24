@@ -90,7 +90,7 @@ async def execute(ctx):
   global board
   global gameOver
   if(gameOver):
-    ctx.send("There is no running board to execute.")
+    await ctx.send("There is no running board to execute.")
     return
   if turn == ctx.author:
     r,c=0,0
@@ -103,15 +103,15 @@ async def execute(ctx):
     while(1):
       curr = board[r][c]
       if([r,c] in route):
-        ctx.send("Tie")
+        await ctx.send("Tie")
         gameOver = True
         return
       elif(curr == 'A'):
-        ctx.send("<@" +str(p1.id) + "> wins")
+        await ctx.send("<@" +str(p1.id) + "> wins")
         gameOver = True
         return
       elif(curr == 'B'):
-        ctx.send("<@" +str(p2.id) + "> wins")
+        await ctx.send("<@" +str(p2.id) + "> wins")
         gameOver = True
         return
       elif(stringMode and curr != '"'):
