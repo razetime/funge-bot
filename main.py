@@ -70,9 +70,16 @@ async def move(ctx,char,x:int,y:int):
     await ctx.send("There is no game in progress. Type %play to start!")
   else:
     if turn == ctx.author:
-      if(abs(y)<len(board) and abs(x)<len(board[0]) and char in pieces):
+      if(abs(y)<len(board) and abs(x)<len(board[0]) and char in pieces and board[y][x] == '.'):
         board[y][x] = char
         await ctx.send("Current Board:\n"+grid())
+        pieces = random.sample(cmds,k=4)
+        if(turn == p1):
+          turn = p2
+        else:
+          turn = p1
+        await ctx.send("<@" + str(turn.id) + ">'s turn")
+        await ctx.send("Pieces: `"+",".join(pieces)+"`")
       else:
         await ctx.send("Invalid move. Try again.")
     else:
@@ -99,8 +106,6 @@ async def execute(ctx):
         ctx.send("Tie")
         gameOver = True
         return
-      elif(stringMode and curr != '"'):
-        string += curr
       elif(curr == 'A'):
         ctx.send("<@" +str(p1.id) + "> wins")
         gameOver = True
@@ -109,6 +114,8 @@ async def execute(ctx):
         ctx.send("<@" +str(p2.id) + "> wins")
         gameOver = True
         return
+      elif(stringMode and curr != '"'):
+        string += curr
       elif(curr == '>'):
         dr,dc = 0,1
       elif(curr == '<'):
@@ -141,12 +148,12 @@ async def execute(ctx):
           dr = 1
           dc = 0
       elif(curr == '_'):
-          if(stack.pop()):
-            dr = 0
-            dc = -1
-          else:
-            dr = 0
-            dc = 1
+        if(stack.pop()):
+          dr = 0
+          dc = -1
+        else:
+          dr = 0
+          dc = 1
       else:
         pass
       route.append([r,c])
