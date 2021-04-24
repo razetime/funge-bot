@@ -103,15 +103,15 @@ async def execute(ctx):
     while(1):
       curr = board[r][c]
       if([r,c] in route):
-        await ctx.send("Tie")
+        await ctx.send("Tie.")
         gameOver = True
         return
       elif(curr == 'A'):
-        await ctx.send("<@" +str(p1.id) + "> wins")
+        await ctx.send("<@" +str(p1.id) + "> (A) wins")
         gameOver = True
         return
       elif(curr == 'B'):
-        await ctx.send("<@" +str(p2.id) + "> wins")
+        await ctx.send("<@" +str(p2.id) + "> (B) wins")
         gameOver = True
         return
       elif(stringMode and curr != '"'):
