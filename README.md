@@ -31,8 +31,8 @@ If the board is completely full, then execution is automatic. Errors/reaching an
 <>^v|_?# all do the same as regular befunge
 . is a nop
 A and B are the target cells
-+-*% all impact the side stack (add, sub, mul, div, mod) 
-/\ move the instruction pointer diagonally
++-*/% all impact the side stack (add, sub, mul, div, mod) 
+\ swaps top two side stack values
 @ is a double jump
 " toggles string mode
 0-9 impact side stack
