@@ -174,22 +174,5 @@ async def endGame(ctx):
     await ctx.send("Game ended.")
 
 
-
-
-
-# @bot.command(name='help')
-# async def help(ctx):
-#   await ctx.send("""Full list of rules and commands:
-# https://github.com/razetime/funge-bot/blob/main/README.md""")
-# # @client.event
-# # async def on_message(message):
-# #   if message.author == client.user:
-# #     return
-# #   if message.content.startswith("$hello"):
-# #     await message.channel.send("Hello!")
-
-
-
-
 keep_alive()
 bot.run(os.environ['TOKEN'])
