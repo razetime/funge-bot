@@ -20,8 +20,8 @@ def grid():
   return "```\n"+"\n".join(["".join(i) for i in board])+ "\n```"
 
 
-@bot.command(name='play', help='[player1 player2 width height]: Starts a game with another person, given board size.')
-async def play(ctx,pl1:discord.Member,pl2:discord.Member,w:int,h:int):
+@bot.command(name='play', help='Starts a game with another person, given board size.')
+async def play(ctx,pl2:discord.Member,w:int,h:int):
   global p1
   global p2
   global turn
@@ -34,7 +34,7 @@ async def play(ctx,pl1:discord.Member,pl2:discord.Member,w:int,h:int):
     board = [['.' for i in range(w)] for i in range(h)]
     gameOver = False
     count = 0
-    p1 = pl1 # Player A
+    p1 = ctx.author # Player A
     p2 = pl2 # Player B
 
     # Assign player positions
@@ -58,7 +58,7 @@ async def play(ctx,pl1:discord.Member,pl2:discord.Member,w:int,h:int):
     await ctx.send("A game is in progress. Please wait.")
 
 
-@bot.command(name='move', help='[char x y]: places char at the given coordinates.')
+@bot.command(name='move', help='places char at the given coordinates.')
 async def move(ctx,char,x:int,y:int):
   global p1
   global p2
@@ -169,9 +169,11 @@ async def endGame(ctx):
   global gameOver
   if(gameOver):
     await ctx.send("There is no game to end.")
-  else:
+  elif(ctx.author == p1 or ctx.author == p2):
     gameOver = True
     await ctx.send("Game ended.")
+  else:
+    await ctx.send("You are not playing a game.")
 
 
 keep_alive()
